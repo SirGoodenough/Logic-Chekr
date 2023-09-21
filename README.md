@@ -1,30 +1,30 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/custom-components/hacs)
-![Version](https://img.shields.io/github/v/release/SirGoodenough/Availability-Template)
+![Version](https://img.shields.io/github/v/release/SirGoodenough/Logic-Chekr)
 
 <a href="https://www.buymeacoffee.com/SirGoodenough"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=SirGoodenough&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" width=auto, height=30/></a>
 <base target="_blank">
 
-# Availability-Template
+# Logic-Chekr
 
 Custom Template for checking the availability of an entity.
 The main reason for using this template is not because it's complicated, it's because availability is something you will be using over and over when you are dealing with sensors, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists.
 
 # Installation
 
-Install this in HACS or download the `availability_template.jinja` from this repository and place the files into your `config\custom_templates` directory.
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=SirGoodenough&repository=Availability-Template&category=template)
+Install this in HACS or download the `logic_chekr.jinja` from this repository and place the files into your `config\custom_templates` directory.
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=SirGoodenough&repository=Logic-Chekr&category=template)
 
 If you cannot see templates in your HACS listing, you *may* need to enable 'experimental features' mode. To do this find the HACS section of the Home Assistant Integration page. Click on the '>' arrow to bring you to the custom integration page. Then click on configure, and select 'enable experimental features' check box. click submit, then float out and restart the HA server to make sure it takes. When you come back HACS will look slightly different, but the Templates section is now visible and you will be able to select it. At some point in time HACS will update and the new interface and options will be the only available interface.
 
-# Availability Test
+# Test for ANY to be True
 
-## `avail([entity1, ...])`
+## `true_any([entity1, ...])`
 
-This expects a list of entities.
+This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
 - The number of entities are counted.
-- The number of entities that are NOT unknown, unavailable, empty, or none are counted.
-- If the 2 counts are the same, true is returned, else false, defaults to false.
+- The number of entities that are one of: ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'] is counted.
+- If there are one or more that match, true is returned, else false, defaults to false.
 
 ### REMEMBER!!
 
@@ -34,13 +34,20 @@ This expects a list of entities.
 
 ### Examples
 
-Generically, this can be dropped into many templates to be sure the result will render properly.
+Generically, this can be dropped into many templates to to help with the logic status of entities.
 
 ```jinja
-availability: >-
-    {% from 'availability_template.jinja' import avail %}
-    {{- avail(['entity_1','entity_2']) | bool -}}
+- if: >-
+    {% from 'logic_chekr.jinja' import true_any %}
+    {{- true_any( [door_open] ) | bool -}} 
 ```
+
+
+
+
+
+
+
 
 Here is a full example that uses this.  It will give you percent sunshine estimate based on data from sun angle and cloud coverage if you have those integrations in your config. (Found the state statement somewhere a while ago, sorry there is no attribution. I use it in my personal config.)
 
