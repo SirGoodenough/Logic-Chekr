@@ -1,0 +1,6 @@
+{
+    "name": "Logic Chekr",
+    "filename": "logic_chekr.jinja",
+    "homeassistant": "2023.9.0",
+    "render_readme": true
+}
