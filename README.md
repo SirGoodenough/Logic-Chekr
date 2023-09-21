@@ -6,8 +6,11 @@
 
 # Logic-Chekr
 
-Custom Template for checking the availability of an entity.
-The main reason for using this template is not because it's complicated, it's because availability is something you will be using over and over when you are dealing with sensors, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists.
+This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False. I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [] bracket list, so it works both ways.
+
+Templates are available for testing both True and False separately, and you can check if Any are that state, all are that state, or only one is that state. Items that are a state other than some of the standard True/False indications will be ignored. (unavailable, unknown, etc)
+
+The main reason for using this template is not because it's complicated, it's because the logic check is something you may be using over and over when you are dealing with automations, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists.
 
 # Installation
 
