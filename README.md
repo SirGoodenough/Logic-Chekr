@@ -52,31 +52,7 @@ Generically, this can be dropped into many templates to to help with the logic s
 Here is a full example that uses this.  It will give you percent sunshine estimate based on data from sun angle and cloud coverage if you have those integrations in your config. (Found the state statement somewhere a while ago, sorry there is no attribution. I use it in my personal config.)
 
 ```jinja
-- template
-  - sensor:
-    - name: "sunlight_pct"
-      unique_id: 9a7586c0-0947-4b41-97e0-c0d2150bd0bb
-      unit_of_measurement: "%"
-      state: >-
-        {%- set elevation = state_attr('sun.sun','elevation') | float %}
-        {%- set cloud_coverage = states('sensor.openweathermap_cloud_coverage') | float %}
-        {%- set cloud_factor = (1 - (0.75 * ( cloud_coverage / 100) ** 3 )) %}
-        {%- set min_elevation = -6 %}
-        {%- set max_elevation = 60 %}
-        {%- set adjusted_elevation = elevation - min_elevation %}
-        {%- set adjusted_elevation = [adjusted_elevation,0] | max %}
-        {%- set adjusted_elevation = [adjusted_elevation,max_elevation - min_elevation] | min %}
-        {%- set adjusted_elevation = adjusted_elevation / (max_elevation - min_elevation) %}
-        {%- set adjusted_elevation = adjusted_elevation %}
-        {%- set adjusted_elevation = adjusted_elevation * 100 %}
-        {%- set brightness = adjusted_elevation * cloud_factor %}
-        {{ brightness | round }}
-      availability: >-
-        {% from 'availability_template.jinja' import avail %}
-        {{- avail(['sun.sun','sensor.openweathermap_cloud_coverage']) | bool -}}
-      icon: mdi:sun-angle
-      attributes:
-        friendly_name: "Sunlight Percentage"
+TBD
 
 ```
 
