@@ -2,11 +2,12 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
-      The number of entities that are one of:
-      ['true','True','yes','Yes','YES','on','ON','t','T','y','Y']
-      is counted.
+      The number of entities that evaluate as True using
+      `bool(value, default) function` is counted. (truthy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to null/undefined.
       If there are one or more that match, 
-      true is returned, else false, defaults to false.
+      True is returned, else False, defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -18,10 +19,10 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'])
+    | map('bool', null) | select('eq', True)
     | list | count > 0 -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}
 
@@ -29,11 +30,12 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
-      The number of entities that are one of:
-      ['false','False','no','No','NO','off','OFF','f','F','n','N']
-      is counted.
+      The number of entities that evaluate as False using
+      `bool(value, default) function` is counted. (falsy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to null/undefined.
       If there are one or more that match, 
-      true is returned, else false, defaults to false.
+      True is returned, else False, defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -45,10 +47,10 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['false','False','no','No','NO','off','OFF','f','F','n','N'])
+    | map('bool', null) | select('eq', False)
     | list | count > 0 -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}
 
@@ -56,11 +58,12 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
-      The number of entities that are one of:
-      ['true','True','yes','Yes','YES','on','ON','t','T','y','Y']
-      is counted.
+      The number of entities that evaluate as True using
+      `bool(value, default) function` is counted. (truthy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to null/undefined.
       If there is only one that matches, 
-      true is returned, else false, defaults to false.
+      True is returned, else False, defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -72,10 +75,10 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'])
+    | map('bool', null) | select('eq', True)
     | list | count == 1 -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}
 
@@ -83,12 +86,13 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
+      The number of entities that evaluate as True using
+      `bool(value, default) function` is counted. (truthy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to True.
       The number of entities are counted.
-      The number of entities that are one of:
-      ['true','True','yes','Yes','YES','on','ON','t','T','y','Y']
-      is counted.
-      If the 2 counts are the same, true is returned, else false,
-      defaults to false.
+      If the 2 counts are the same, True is returned, else False,
+      defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -100,10 +104,10 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'])
+    | map('bool', True) | select('eq', True)
     | list | count == entity_list | count -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}
 
@@ -111,11 +115,12 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
-      The number of entities that are one of:
-      ['false','False','no','No','NO','off','OFF','f','F','n','N']
-      is counted.
-      If there is only one that matches, true is returned,
-      else false, defaults to false.
+      The number of entities that evaluate as False using
+      `bool(value, default) function` is counted. (falsy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to null/undefined.
+      If there is only one that matches, True is returned,
+      else False, defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -127,10 +132,10 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['false','False','no','No','NO','off','OFF','f','F','n','N'])
+    | map('bool', null) | select('eq', False)
     | list | count == 1 -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}
 
@@ -138,12 +143,13 @@
   {# This expects a list of entities. This means [] brackets
       OR if your entities are pulled from a BluePrint entity selector,
       that is already a list and you do not need the brackets.
+      The number of entities that evaluate as False using
+      `bool(value, default) function` is counted. (falsy values)
+      https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters
+      Items that do not evaluate as bool will be defaulted to False.
       The number of entities are counted.
-      The number of entities that are one of:
-      ['false','False','no','No','NO','off','OFF','f','F','n','N']
-      is counted.
-      If the 2 counts are the same, true is returned, else false,
-      defaults to false.
+      If the 2 counts are the same, True is returned, else False,
+      defaults to False.
     REMEMBER!!
       This always returns text, so cast to bool on the other end to be certain
       of the result.
@@ -155,9 +161,9 @@
   #}
   {%- if entity_list is iterable -%}
     {{- entity_list | map('states') 
-    | select('in', ['false','False','no','No','NO','off','OFF','f','F','n','N'])
+    | map('bool', False) | select('eq', False)
     | list | count == entity_list | count -}}
   {%- else -%}
-    false 
+    False 
   {%- endif -%}
 {% endmacro %}

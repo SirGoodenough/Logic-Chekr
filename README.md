@@ -8,9 +8,9 @@
 
 This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False. I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [] bracket list, so it works both ways.
 
-Templates are available for testing both True and False separately, and you can check if any are that state, all are that state, or only one is that state. Items that are a state other than some of the standard True/False indications will be ignored. (unavailable, unknown, etc)
+Templates are available for testing both True and False separately, and you can check if any are that state, all are that state, or only one is that state. Items that are a state other than some of the standard [truthy/falsy](https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) indications will be ignored. (null, unavailable, unknown, numbers that are not 0 or 1, etc.)
 
-The main reason for using this template is not because it's complicated, it's because the logic check is something you may be using over and over when you are dealing with automations, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists.
+The main reason for using this template is not because it's complicated, it's because the logic check is something you may be using over and over when you are dealing with automations, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists. If you are only going to use this template in one place in your code, just copy the template and paste it in there directly for simplicity.
 
 # Installation
 
@@ -27,8 +27,10 @@ If you cannot see templates in your HACS listing, you *may* need to enable 'expe
 
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
-- The number of entities that are one of: ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'] is counted.
-- If there are one or more that match, true is returned, else false, defaults to false.
+- The number of entities that evaluate as True using `bool(value, default) function` is counted.
+      [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to null/undefined.
+- If there are one or more that match, True is returned, else False, defaults to False.
 
 ### REMEMBER!!
 
@@ -54,8 +56,10 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
-- The number of entities that are one of: ['false','False','no','No','NO','off','OFF','f','F','n','N'] is counted.
-- If there are one or more that match, true is returned, else false, defaults to false.
+- The number of entities that evaluate as False using `bool(value, default) function` is counted.
+      [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to null/undefined.
+- If there are one or more that match, True is returned, else False, defaults to False.
 
 ### REMEMBER!!
 
@@ -81,8 +85,10 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
-- The number of entities that are one of: ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'] is counted.
-- If there is only one that matches, true is returned, else false, defaults to false.
+- The number of entities that evaluate as True using `bool(value, default) function` is counted.
+      [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to null/undefined.
+- If there is only one that matches, True is returned, else False, defaults to False.
 
 ### REMEMBER!!
 
@@ -109,8 +115,10 @@ Generically, this can be dropped into many templates to to help with the logic s
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
 - The number of entities are counted.
-- The number of entities that are one of: ['true','True','yes','Yes','YES','on','ON','t','T','y','Y'] is counted.
-- If the 2 counts are the same, true is returned, else false, defaults to false.
+- The number of entities that evaluate as True using `bool(value, default) function` is counted.
+      [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to True.
+- If the 2 counts are the same, True is returned, else False, defaults to False.
 
 ### REMEMBER!!
 
@@ -136,8 +144,10 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
-- The number of entities that are one of: ['false','False','no','No','NO','off','OFF','f','F','n','N'] is counted.
-- If there is only one that matches, true is returned, else false, defaults to false.
+- The number of entities that evaluate as False using `bool(value, default) function` is counted.
+      [falsy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to null/undefined.
+- If there is only one that matches, True is returned, else False, defaults to False.
 
 ### REMEMBER!!
 
@@ -164,9 +174,11 @@ Generically, this can be dropped into many templates to to help with the logic s
 This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
 
 - The number of entities are counted.
-- The number of entities that are one of: ['false','False','no','No','NO','off','OFF','f','F','n','N'] is counted.
-- If the 2 counts are the same, true is returned, else false, defaults to false.
-
+- The number of entities that evaluate as False using `bool(value, default) function` is counted.
+      [falsy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+- Items that do not evaluate as bool will be defaulted to False.
+- If the 2 counts are the same, True is returned, else False, defaults to False.
+  
 ### REMEMBER!!
 
 > This always returns text, so cast to bool on the other end to be certain of the result.
@@ -183,14 +195,11 @@ Generically, this can be dropped into many templates to to help with the logic s
     {{- false_all( [door_open] ) | bool -}} 
 ```
 
+*********************
 
+# Full Example in an actual BluePrint
 
-
-
-
-
-
-Here is a full example that uses this.  It is part of a BluePrint showing the use of 2 of the functions. Notice that since it is a list from an !input entity selector, no [] brackets are required.
+Here is a full example that uses this.  It is part of a BluePrint showing the use of 2 of the functions. Notice that since `door_open` is a list from an !input entity selector, no [] brackets are required.
 
 ```jinja
 variables:
@@ -230,7 +239,9 @@ action:
 
 ```
 
-### Other Info
+*********************
+
+# Other Info
 
 Location of this code: https://github.com/SirGoodenough/Logic-Chekr
 
