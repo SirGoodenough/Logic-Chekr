@@ -6,7 +6,7 @@
 
 # Logic-Chekr
 
-This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False. I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [] bracket list, so it works both ways.
+This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False. I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [ ] braces list, so it works both ways.
 
 Templates are available for testing both True and False separately, and you can check if any are that state, all are that state, or only one is that state. Items that are a state other than some of the standard [truthy/falsy](https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) indications will be ignored. (null, unavailable, unknown, numbers that are not 0 or 1, etc.)
 
@@ -23,9 +23,9 @@ If you cannot see templates in your HACS listing, you *may* need to enable 'expe
 
 # Test for ANY to be True
 
-## `true_any([entity1, ...])`
+## `true_any([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities that evaluate as True using `bool(value, default) function` is counted.
       [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
@@ -52,12 +52,12 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Test for ANY to be False
 
-## `false_any([entity1, ...])`
+## `false_any([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities that evaluate as False using `bool(value, default) function` is counted.
-      [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
+      [falsy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
 - Items that do not evaluate as bool will be defaulted to null/undefined.
 - If there are one or more that match, True is returned, else False, defaults to False.
 
@@ -81,9 +81,9 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Test for ONE to be True
 
-## `true_one([entity1, ...])`
+## `true_one([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities that evaluate as True using `bool(value, default) function` is counted.
       [truthy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
@@ -110,9 +110,9 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Test for ALL to be True
 
-## `true_all([entity1, ...])`
+## `true_all([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities are counted.
 - The number of entities that evaluate as True using `bool(value, default) function` is counted.
@@ -140,9 +140,9 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Test for ONE to be False
 
-## `false_one([entity1, ...])`
+## `false_one([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities that evaluate as False using `bool(value, default) function` is counted.
       [falsy values](https://www.home-assistant.io/docs/configuration/templating/#numeric-functions-and-filters)
@@ -169,9 +169,9 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Test for ALL to be False
 
-## `false_all([entity1, ...])`
+## `false_all([entity1, entity2, /])`
 
-This expects a list of entities. This means [] brackets OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the brackets.
+This expects a list of entities. This means [ ] braces OR if your entities are pulled from a BluePrint entity selector, that is already a list and you do not need the braces.
 
 - The number of entities are counted.
 - The number of entities that evaluate as False using `bool(value, default) function` is counted.
@@ -199,7 +199,7 @@ Generically, this can be dropped into many templates to to help with the logic s
 
 # Full Example in an actual BluePrint
 
-Here is a full example that uses this.  It is part of a BluePrint showing the use of 2 of the functions. Notice that since `door_open` is a list from an !input entity selector, no [] brackets are required.
+Here is a full example that uses this.  It is part of a BluePrint showing the use of 2 of the functions. Notice that since `door_open` is a list from an !input entity selector, no [ ] braces are required.
 
 ```jinja
 variables:
