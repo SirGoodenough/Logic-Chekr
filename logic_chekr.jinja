@@ -17,7 +17,10 @@
       {% from 'logic_chekr.jinja' import true_any %}
       {{- true_any(['entity_1','entity_2']) | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', null) | select('eq', True)
     | list | count > 0 -}}
@@ -45,7 +48,10 @@
       {% from 'logic_chekr.jinja' import false_any %}
       {{- false_any(['entity_1','entity_2']) | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', null) | select('eq', False)
     | list | count > 0 -}}
@@ -73,7 +79,10 @@
       {% from 'logic_chekr.jinja' import true_one %}
       {{- true_one(['entity_1','entity_2]') | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', null) | select('eq', True)
     | list | count == 1 -}}
@@ -102,7 +111,10 @@
       {% from 'logic_chekr.jinja' import true_all %}
       {{- true_all(['entity_1','entity_2']) | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', True) | select('eq', True)
     | list | count == entity_list | count -}}
@@ -130,7 +142,10 @@
       {% from 'logic_chekr.jinja' import false_one %}
       {{- false_one(['entity_1','entity_2']) | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', null) | select('eq', False)
     | list | count == 1 -}}
@@ -159,7 +174,10 @@
       {% from 'logic_chekr.jinja' import false_all %}
       {{- false_all(['entity_1','entity_2']) | bool -}}
   #}
-  {%- if entity_list is iterable -%}
+  {# First tests to make sure this is a list #}
+  {%- if entity_list is iterable and
+    (entity_list is not string and entity_list is not mapping)
+  -%}
     {{- entity_list | map('states') 
     | map('bool', False) | select('eq', False)
     | list | count == entity_list | count -}}
