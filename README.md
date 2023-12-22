@@ -1,3 +1,7 @@
+
+
+This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False.
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/custom-components/hacs)
 ![Version](https://img.shields.io/github/v/release/SirGoodenough/Logic-Chekr)
 
@@ -6,7 +10,7 @@
 
 # 🧯 Logic-Chekr
 
-This Custom Template for checking if members of a list of entities such as input_booleans or binary_sensors or other custom sensors are displaying True or False. I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [ ] braces list, so it works both ways.
+I found that the !input value of entities you typically get from a BluePrint is a list of entities, so constructs like is_state will not work with them directly. I came up with this to make that easier to manage. Of course bare entities can also be checked by putting them in as a [ ] braces list, so it works both ways.
 
 Templates are available for testing both True and False separately, and you can check if any are that state, all are that state, or only one is that state. Items that are a state other than some of the standard [truthy/falsy](https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) indications will be ignored. (null, unavailable, unknown, numbers that are not 0 or 1, etc.)
 
