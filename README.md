@@ -20,7 +20,7 @@ This requires HomeAssistant version 2023.11.0 or greater due to the use of the l
 
 # Installation
 
-Install this in HACS or download the `logic_chekr.jinja` from this repository and place the files into your `config\custom_templates` directory.
+Install this in HACS or download the `logic_chekr.jinja` from [this repository](https://github.com/SirGoodenough/Logic-Chekr) and place the files into your `config\custom_templates` directory.
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=SirGoodenough&repository=Logic-Chekr&category=template)
 
 #### If you cannot see templates in your HACS listing
