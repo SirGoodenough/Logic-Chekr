@@ -16,6 +16,12 @@ Templates are available for testing both True and False separately, and you can 
 
 The main reason for using this template is not because it's complicated, it's because the logic check is something you may be using over and over when you are dealing with automations, so being able to repeat the same action over and over is better if there is 1 place in your project the code exists. If you are only going to use this template in one place in your code, just copy the template and paste it in there directly for simplicity.
 
+Documentation for this Custom Template can be found at:
+
+- The Description of each of the templates themselves.
+- The github readme: https://github.com/SirGoodenough/Color-Multi-Tool/blob/master/README.md.
+- Home Assistant Community Forum: https://community.home-assistant.io/t/color-multi-tool/659958.
+
 This requires HomeAssistant version 2023.11.0 or greater due to the use of the list test in the code.
 
 # 🔩 Installation
