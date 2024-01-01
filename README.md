@@ -19,8 +19,8 @@ The main reason for using this template is not because it's complicated, it's be
 Documentation for this Custom Template can be found at:
 
 - The Description of each of the templates themselves.
-- The github readme: https://github.com/SirGoodenough/Color-Multi-Tool/blob/master/README.md.
-- Home Assistant Community Forum: https://community.home-assistant.io/t/color-multi-tool/659958.
+- The github readme: https://github.com/SirGoodenough/Logic-Chekr/blob/master/README.md.
+- Home Assistant Community Forum: https://community.home-assistant.io/t/logic-chekr/659934.
 
 This requires HomeAssistant version 2023.11.0 or greater due to the use of the list test in the code.
 
