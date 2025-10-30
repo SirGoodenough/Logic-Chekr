@@ -21,6 +21,7 @@ Documentation for this Custom Template can be found at:
 - The Description of each of the templates themselves.
 - The github readme: https://github.com/SirGoodenough/Logic-Chekr/blob/master/README.md.
 - Home Assistant Community Forum: https://community.home-assistant.io/t/logic-chekr/659934.
+- /2025 https://whatarewefixing.today/2550/issue-resolution-of-my-template-macro-repos/
 
 This requires HomeAssistant version 2023.11.0 or greater due to the use of the list test in the code.
 
